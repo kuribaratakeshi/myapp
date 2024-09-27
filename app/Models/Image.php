@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Models;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Image extends Model
 {
@@ -18,4 +18,5 @@ class Image extends Model
         return $this->hasMany(Article_Image::class);  
 
     }
+
 }
