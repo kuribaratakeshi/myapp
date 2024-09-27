@@ -9,6 +9,9 @@ class Article_Stamp extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $table ='article_stamp';
+
     protected $fillable = [
         'article_id',
         'stamp_id'

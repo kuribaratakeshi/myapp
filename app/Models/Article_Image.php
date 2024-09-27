@@ -9,8 +9,10 @@ class Article_Image extends Model
 {
     use HasFactory;
 
+    protected $table ='article_image';
+
     protected $fillable = [
-        'user_id',
+        'article_id',
         'image_id'
     ];
     

@@ -5,21 +5,104 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\User;
+use App\Models\Image;
+use App\Models\Article_Image;
+
+
+use App\Http\Requests\PostRequest; 
+
+
 class PostController extends Controller
 {
     //
 
 
-    public function index(Article $article)//インポートしたPostをインスタンス化して$postとして使用。
+    public function index(Article $article)//インポートしたArticleをインスタンス化して$postとして使用。
     {
         return view('posts.index')->with(['posts' => $article->getPaginateByLimit()]);  
     }
 
 
+    //web.phpのgetの名前({post}のような)にArticleの名前を一致させる必要がある
+
     public function show(Article $post)
     {
 
+
+        //$res = glob('./images/*');
+        //$res = Article::find(1)->article_images()->where('article_id','1')->get();
+        
+
+        //var_dump($res);
+
         return view('posts.show')->with(['post' => $post]);
     }
+
+    public function create()
+    {
+        return view('posts.create');
+
+    }
+
+    public function store(PostRequest $request)
+    {
+        
+        if (! file_exists ( 'images' )) {
+            mkdir ( 'images' );
+        }
+        $article  = new Article;
+        $user = User::all()->first();
+        $article->user_id = $user->id;
+        $input = $request['post'];
+        $article->fill($input)->save();
+
+        $temp_file = $input["image"] ;
+        $dir = './images/';
+        $image_name = uniqid(mt_rand(),false);
+        $image_name .= '.png';
+        move_uploaded_file($temp_file, $dir . $image_name);
+
+
+        $image_list = new Image;
+        $image_list-> fill(['image'=> $image_name]) ;
+        $image_list ->save();
+
+        $article_image  = new Article_Image;
+        $article_image -> fill(['article_id'=> $article->id]);
+        $article_image -> fill(['image_id'=> $image_list->id]);
+        $article_image ->save();
+
+
+
+
+
+
+        return redirect('/posts/' . $article->id);
+    }
+
+    public function edit(Article $post)
+    {
+
+        return view('posts.edit')->with(['post' => $post]);
+
+    }
+
+    public function update(PostRequest $request,Article $post)
+    {
+        
+        $input_post = $request['post'];
+        $post->fill($input_post)->save();
+
+        return redirect('/posts/' . $post->id);
+
+    }
+
+    public function delete(Article $post)
+    {
+        $post->delete();
+        return redirect('/');
+        
+    }
+
 
 }
