@@ -17,6 +17,7 @@ class PostController extends Controller
     //
 
 
+
     public function index(Article $article)//インポートしたArticleをインスタンス化して$postとして使用。
     {
         return view('posts.index')->with(['posts' => $article->getPaginateByLimit()]);  
@@ -30,11 +31,14 @@ class PostController extends Controller
 
 
         //$res = glob('./images/*');
-        //$res = Article::find(1)->article_images()->where('article_id','1')->get();
-        
-
+        //function console_log($data){
+        //    echo '<script>';
+        //    echo 'console.log('.json_encode($data).')';
+        //    echo '</script>';
+        //}
         //var_dump($res);
-
+        
+        
         return view('posts.show')->with(['post' => $post]);
     }
 
@@ -43,34 +47,75 @@ class PostController extends Controller
         return view('posts.create');
 
     }
+    public function serch(Article $article)
+    {
+        return view('posts.serch');
+    }
 
     public function store(PostRequest $request)
-    {
+    {   
+        function console_log($data){
+            echo '<script>';
+            echo 'console.log('.json_encode($data).')';
+            echo '</script>';
+        }
+        
+
+        $input = $request['post'];
+        
+        console_log(count($input["image"], COUNT_RECURSIVE));
+  
         
         if (! file_exists ( 'images' )) {
             mkdir ( 'images' );
         }
+
+
         $article  = new Article;
         $user = User::all()->first();
+
+        //use Illuminate\Support\Facades\Auth;
+        //$user = Auth::id();
+        //dump($user);
+        //dd(Auth::user());
+        //dd($user);
+
         $article->user_id = $user->id;
-        $input = $request['post'];
+
+
+        
         $article->fill($input)->save();
 
-        $temp_file = $input["image"] ;
+        
+        //$temp_file = $input["image"] ;
         $dir = './images/';
-        $image_name = uniqid(mt_rand(),false);
-        $image_name .= '.png';
-        move_uploaded_file($temp_file, $dir . $image_name);
+        //$image_name = uniqid(mt_rand(),false);
+        //$image_name .= '.png';
 
 
-        $image_list = new Image;
-        $image_list-> fill(['image'=> $image_name]) ;
-        $image_list ->save();
+                
+        //move_uploaded_file($temp_file, $dir . $image_name);
+        //$image_list = new Image;
+        //$image_list-> fill(['image'=> $image_name]) ;
+        //$image_list ->save();
+              
+        foreach($input["image"] as $key => $temp_value){
 
-        $article_image  = new Article_Image;
-        $article_image -> fill(['article_id'=> $article->id]);
-        $article_image -> fill(['image_id'=> $image_list->id]);
-        $article_image ->save();
+            $image_name = uniqid(mt_rand(),false);
+            $image_name .= '.png';
+            move_uploaded_file($temp_value, $dir . $image_name);
+            $image_list = new Image;
+            $image_list-> fill(['path'=> $image_name]) ;
+            $image_list ->save();
+
+
+            $article_image  = new Article_Image;
+            $article_image -> fill(['article_id'=> $article->id]);
+            $article_image -> fill(['image_id'=> $image_list->id]);
+            $article_image ->save();
+        }
+
+
 
 
 

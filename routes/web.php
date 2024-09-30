@@ -20,7 +20,7 @@ Route::get('/', function() {
 
 Route::get('/', [PostController::class, 'index']);   
 
-
+Route::get('/posts/serch', [PostController::class, 'serch']);
 Route::get('/posts/create', [PostController::class, 'create']);
 
 Route::post('/posts', [PostController::class, 'store']);
