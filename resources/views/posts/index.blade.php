@@ -2,12 +2,19 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Blog</title>
+        <title>Article</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1>Blog Name</h1>
+        <h1>Article Index</h1>
+        <h2>
+        <a href="/posts/serch">検索</a>
+        </h2>
+        <h2>
+        <a href='/posts/create'>create</a>
+        </h2>
+
         <div class='posts'>
             @foreach ($posts as $post)
                 <div class='post'>
@@ -15,12 +22,13 @@
                     <h2 class='title'>
                         <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
                     </h2>
-            
                     <h1>画像表示</h1>
-                    <img src="images/{{\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->value('image_id'))->image }}" width=auto height="400">
-
-                    <h2 class='imgname'>{{\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->value('image_id'))->image }}</h2>
-
+                    <h2 class='imgname'>{{\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id'))->count() }}個</h2>
+                    @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $post)
+                    <img src="images/{{$post->path }}" width=auto height="400">
+                    <h2 class='imgname'>{{$post->path }}</h2>
+                    @endforeach
+                    
                     <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
                     @csrf
                     @method('DELETE')
@@ -31,7 +39,7 @@
 
             @endforeach
         </div>
-        <a href='/posts/create'>create</a>
+        
         <div class='paginate'>
             {{ $posts->links() }}
         </div>
@@ -39,7 +47,6 @@
         <script>
             function deletePost(id) {
                 'use strict'
-
                 if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
                     document.getElementById(`form_${id}`).submit();
                 }
