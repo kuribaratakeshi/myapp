@@ -5,9 +5,16 @@
         <title>Article</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+
     </head>
+
+<x-app-layout>
+    <x-slot name="header">
+    Article Index
+    </x-slot>
+
     <body>
-        <h1>Article Index</h1>
         <h2>
         <a href="/posts/serch">検索</a>
         </h2>
@@ -18,16 +25,17 @@
         <div class='posts'>
             @foreach ($posts as $post)
                 <div class='post'>
-                    <h2 class='name'>{{ $post->user->name }}</h2>
+                    <h2 class='name'>{{ Auth::user()->name }}</h2>
                     <h2 class='title'>
                         <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
                     </h2>
                     <h1>画像表示</h1>
-                    <h2 class='imgname'>{{\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id'))->count() }}個</h2>
-                    @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $post)
-                    <img src="images/{{$post->path }}" width=auto height="400">
-                    <h2 class='imgname'>{{$post->path }}</h2>
-                    @endforeach
+                
+                @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $post)
+                @if($post->path)
+                    <img src="{{ $post->path }}" width="10%" height="10%" alt="画像が読み込めません。">
+                @endif
+                @endforeach
                     
                     <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
                     @csrf
@@ -53,5 +61,7 @@
             }
         </script>
     </body>
+</x-app-layout>
+   
 </html>
 

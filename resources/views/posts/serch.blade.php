@@ -35,28 +35,15 @@ if (isset($_GET['search'])) {
         <div>
             @foreach ($stmt as $post)
                 <h2>{{ $post->title }} </h2>
-                @foreach ($post->article_images as $image)
-                {{$image}}
-                    @foreach ($image->image() as $picture)
-                    <h1>{{$picture}}</h1>
-                    @endforeach
-              
-
+                @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $post)
+                @if($post->path)
+                    <img src="{{ $post->path }}" width="10%" height="10%" alt="画像が読み込めません。">
+                @endif
                 @endforeach
-                <img src="../images/{{$post->path }}" width=auto height="400">
-                <h2 class='imgname'>{{$post->path }}</h2>
-
 
 
             @endforeach
-            <?php foreach ($stmt as $post): ?>
-            <p><strong>記事の名前</strong><br>
-            <?php echo $post['title'] ?><br>
-                    @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $post)
-                    <img src="../images/{{$post->path }}" width=auto height="400">
-                    <h2 class='imgname'>{{$post->path }}</h2>
-                    @endforeach
-            <?php endforeach; ?>
+
         </div>
 
     </body>
