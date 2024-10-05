@@ -7,8 +7,8 @@ use App\Models\Article;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Article_Image;
-
-
+use Illuminate\Support\Facades\Auth;
+use Cloudinary;
 use App\Http\Requests\PostRequest; 
 
 
@@ -54,41 +54,36 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {   
-        function console_log($data){
-            echo '<script>';
-            echo 'console.log('.json_encode($data).')';
-            echo '</script>';
-        }
+       // function console_log($data){
+         //   echo '<script>';
+         //   echo 'console.log('.json_encode($data).')';
+       //     echo '</script>';
+        //}
         
 
         $input = $request['post'];
         
-        console_log(count($input["image"], COUNT_RECURSIVE));
+       // console_log(count($input["image"], COUNT_RECURSIVE));
   
         
-        if (! file_exists ( 'images' )) {
-            mkdir ( 'images' );
-        }
+        //if (! file_exists ( 'images' )) {
+        //    mkdir ( 'images' );
+        //}
 
 
         $article  = new Article;
-        $user = User::all()->first();
-
-        //use Illuminate\Support\Facades\Auth;
-        //$user = Auth::id();
+        //$user = User::all()->first();
+        $user = Auth::user();
         //dump($user);
         //dd(Auth::user());
         //dd($user);
 
         $article->user_id = $user->id;
-
-
-        
         $article->fill($input)->save();
 
         
         //$temp_file = $input["image"] ;
-        $dir = './images/';
+        //$dir = './images/';
         //$image_name = uniqid(mt_rand(),false);
         //$image_name .= '.png';
 
@@ -99,13 +94,21 @@ class PostController extends Controller
         //$image_list-> fill(['image'=> $image_name]) ;
         //$image_list ->save();
               
-        foreach($input["image"] as $key => $temp_value){
+        foreach($input["image"] as $key => $image_value){
 
-            $image_name = uniqid(mt_rand(),false);
-            $image_name .= '.png';
-            move_uploaded_file($temp_value, $dir . $image_name);
+          
+
+            //$image_name = uniqid(mt_rand(),false);
+            //$image_name .= '.png';
+
+            
+            //move_uploaded_file($temp_value, $dir . $image_name);
+
+            $image_url = Cloudinary::upload($image_value->getRealPath())->getSecurePath();
+
+
             $image_list = new Image;
-            $image_list-> fill(['path'=> $image_name]) ;
+            $image_list-> fill(['path'=> $image_url ]) ;
             $image_list ->save();
 
 

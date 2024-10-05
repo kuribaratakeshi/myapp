@@ -4,13 +4,18 @@
         <meta charset="utf-8">
         <title>Blog</title>
     </head>
+
+    <x-app-layout>
+    <x-slot name="header">
+    　  Blog
+    </x-slot>
     <body>
         <h1>Blog Name</h1>
         <form action="/posts" method="POST"enctype="multipart/form-data">
             @csrf
             <div class = "image">
                 <input type="file" id ="image_files" name="post[image][]"  multiple>
-                
+
                 <p class ="image__error" style = "color:red">{{$errors -> first('post.image')}}</p>
                 <p class ="image__error" style = "color:red">{{$errors -> first('post.image.*')}}</p>
             </div>
@@ -34,6 +39,8 @@
         </div>
     </body>
 
+</x-app-layout>
+    
 <script>
 
 const fileInput = document.getElementById("image_files");
