@@ -7,9 +7,11 @@ use App\Models\Article;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Article_Image;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Cloudinary;
 use App\Http\Requests\PostRequest; 
+use App\Http\Requests\CommentPostRequest; 
 
 
 class PostController extends Controller
@@ -96,8 +98,6 @@ class PostController extends Controller
               
         foreach($input["image"] as $key => $image_value){
 
-          
-
             //$image_name = uniqid(mt_rand(),false);
             //$image_name .= '.png';
 
@@ -116,17 +116,28 @@ class PostController extends Controller
             $article_image -> fill(['article_id'=> $article->id]);
             $article_image -> fill(['image_id'=> $image_list->id]);
             $article_image ->save();
+
         }
-
-
-
-
-
 
 
 
         return redirect('/posts/' . $article->id);
     }
+
+
+    public function comment(Article $post,CommentPostRequest $request)
+    {
+        $comment  = new comment;
+        $user = Auth::user();
+        $comment->user_id = $user->id;
+        $comment->article_id = $post ->id;
+        $comment->comment =$request->comment;
+        $comment->save();
+
+        return redirect('/posts/'.$post->id);
+    }
+
+
 
     public function edit(Article $post)
     {

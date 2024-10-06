@@ -12,7 +12,7 @@
 
     <x-app-layout>
     <x-slot name="header">
-        　（ヘッダー名）
+        （ヘッダー名）
 </x-slot>
    
     <body>
@@ -21,20 +21,42 @@
         </h1>
         <div class="content">
             <div class="content__post">
+                
                 <h3>本文</h3>
                 <p>{{ $post->body }}</p>    
-                @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $post)
-                @if($post->path)
-                    <img src="{{ $post->path }}"width="20%" height="20%" alt="画像が読み込めません。">
+                @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $image)
+                @if($image->path)
+                    <img src="{{ $image->path }}"width="20%" height="20%" alt="画像が読み込めません。">
                 @endif
                 @endforeach
-                
+               
             </div>
         </div>
+        <div class ="comment">
+        <h1>コメント</h1>
+            <form action="/posts/{{$post->id}}/comment" method="POST">
+            @csrf
+                <input type="text" name="comment" placeholder="タイトル"/>
+                <input type="submit"  value="送信">
+
+                <p class ="image__error" style = "color:red">{{$errors -> first('comment')}}</p>
+            </form>
+
+        </div>
+        <div class = "comments">
+        <h1>コメント欄</h1>
+                @foreach (\App\Models\Comment::where('article_id',$post->id)->get() as $comment)
+                    <p>{{ $comment->comment }}</p>    
+                @endforeach
+        
+
+
+        </div>
+        
         <div class="edit">
             <a href="/posts/{{ $post->id }}/edit">edit</a>
         </div>
-
+        
         <div class="footer">
             <a href="/">戻る</a>
         </div>

@@ -31,9 +31,9 @@
                     </h2>
                     <h1>画像表示</h1>
                 
-                @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $post)
-                @if($post->path)
-                    <img src="{{ $post->path }}" width="10%" height="10%" alt="画像が読み込めません。">
+                @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $image)
+                @if($image->path)
+                    <img src="{{ $image->path }}" width="10%" height="10%" alt="画像が読み込めません。">
                 @endif
                 @endforeach
                     
