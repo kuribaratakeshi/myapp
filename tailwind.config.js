@@ -17,5 +17,19 @@ export default {
         },
     },
 
+    white: {
+        300: "#F8F8F8",
+        500: "#fff",
+      },
+    gray: {
+        100: "#EEEFF2",
+        400: "#AFB5C0",
+        500: "#DDDDDD",
+      },
+    red: {
+        400: "#f87171",
+        500: "#ef4444",
+      },
+
     plugins: [forms],
 };

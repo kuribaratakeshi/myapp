@@ -7,7 +7,7 @@
 
     <x-app-layout>
     <x-slot name="header">
-    　  Blog
+      Blog
     </x-slot>
     <body>
         <h1>Blog Name</h1>

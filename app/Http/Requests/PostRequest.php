@@ -28,10 +28,8 @@ class PostRequest extends FormRequest
             'post.image.*.image'=>'ファイル形式がちがう',
             'post.image.*.mimes'=>'画像の拡張子',
         ];
-
-
-
     }
+    
 
 
 
