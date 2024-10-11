@@ -28,7 +28,7 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     
 
 
-    Route::get('/posts/{post}', 'show')->name('show');
+    Route::get('/posts/{article}', 'show')->name('show');
     Route::put('/posts/{post}', 'update')->name('update');
     Route::delete('/posts/{post}', 'delete')->name('delete');
 

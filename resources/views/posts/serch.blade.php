@@ -19,6 +19,10 @@ if (isset($_GET['search'])) {
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
+    <x-app-layout>
+    <x-slot name="header">
+    Article Index
+    </x-slot>
     <body>
         <div class='articleserch'>
             
@@ -47,4 +51,5 @@ if (isset($_GET['search'])) {
         </div>
 
     </body>
+    </x-app-layout>
 </html>

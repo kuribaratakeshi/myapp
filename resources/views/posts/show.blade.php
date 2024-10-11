@@ -24,7 +24,8 @@
                 
                 <h3>本文</h3>
                 <p>{{ $post->body }}</p>    
-                @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $image)
+                
+                @foreach ($images as $image)
                 @if($image->path)
                     <img src="{{ $image->path }}"width="20%" height="20%" alt="画像が読み込めません。">
                 @endif
