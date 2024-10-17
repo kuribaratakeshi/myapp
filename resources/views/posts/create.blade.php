@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="ja">
     <head>
@@ -9,8 +10,12 @@
     <x-slot name="header">
       Blog
     </x-slot>
-    <body>
-        <h1>Blog Name</h1>
+    <body >
+        
+    <div class="mb-10">
+
+    <h1  class="text-5xl">Blog Name</h1>
+    
         <form action="/posts" method="POST"enctype="multipart/form-data">
             @csrf
             <div class = "image">
@@ -20,23 +25,48 @@
                 <p class ="image__error" style = "color:red">{{$errors -> first('post.image.*')}}</p>
             </div>
             
-            <div id="cimage"></div>
+            <div  id="cimage"></div>
             
-            <div class="title">
+            <div class="bg-red-500 text-black p-4" id="tagform">
+            <h2>Tag</h2>
+                <form>
+                    <input list ="taglist" autocomplete="off"  type="search" id="taginput" />
+                        <datalist id="taglist">
+                            <option value="Java"></option>
+                            <option value="JavaScript"></option>
+                            <option value="Ruby"></option>
+                            <option value="Python"></option>
+                            <option value="PHP"></option>
+                            <option value="TypeScript"></option>
+                            <option value="HTML"></option>
+                            <option value="CSS"></option>
+                        </datalist>
+                </form>
+            </div>
+
+            <div class="bg-blue-500 text-black p-4">
                 <h2>Title</h2>
                 <input type="text" name="post[title]" placeholder="タイトル"/>
                 <p class ="title__error" style = "color:red">{{$errors -> first('post.title')}}</p>
             </div>
-            <div class="body">
+            <div class="bg-blue-500 text-black p-4">
                 <h2>Caption</h2>
                 <textarea name="post[body]" placeholder="キャプション"></textarea>
                 <p class ="caption__error" style = "color:red">{{$errors -> first('post.body')}}</p>
             </div>
-            <input type="submit" value="アップロード"/>
+            <input  
+            class="bg-red-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
+             type="submit" 
+             value="アップロード"
+             />
         </form>
         <div class="footer">
             <a href="/">戻る</a>
         </div>
+
+
+    </div>
+       
     </body>
 
 </x-app-layout>
@@ -64,6 +94,35 @@ const handleFileSelect = () =>{
 }
 }
 fileInput.addEventListener('change', handleFileSelect);
+
+</script>
+
+<script>
+
+    const input =document.getElementById("taginput");
+    //input.addEventListener('input',inputTagFormChange);
+
+    //var taglist = document.getElementById("taglist");
+
+    input.addEventListener('input',function(e){
+        var t=e.target;
+        if(t.nodeName=="INPUT" && t.type=="search"){
+            var v=t.value;
+            var l=t.getAttribute('list');
+            Array.prototype.map.call(document.querySelectorAll('#'+l+' option'),function(i){
+            i.disabled=!i.value.match(new RegExp("^"+v));
+            //console.log(i.disabled);
+            console.log("a"); 
+        });
+        }
+    });
+
+
+    function inputTagFormChange(){
+
+
+
+    }
 
 </script>
 </html>
