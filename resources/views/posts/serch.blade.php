@@ -19,9 +19,11 @@ if (isset($_GET['search'])) {
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
-    <x-app-layout>
+<x-app-layout>
     <x-slot name="header">
-    Article Index
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
     </x-slot>
     <body>
         <div class='articleserch'>

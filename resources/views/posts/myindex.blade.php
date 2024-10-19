@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <title>Article</title>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
+
+    </head>
+
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
+
+
+    <body class="bg-gray-100 min-h-screen flex items-center justify-center">  
+            <button 
+                class="bg-red-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
+                type="button" onclick="location.href = '/posts/create'">
+                create
+            </button> 
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4 p-4">
+
+                    @foreach ($posts as $post)
+                        <div>       
+                        
+                            @foreach (  $post->images as $index=> $image)
+                                @if($image->path)
+                                    @if($index < 1)
+                            <div    class="relative max-w-xs overflow-hidden bg-cover bg-no-repeat"
+                                    data-twe-ripple-init
+                                    data-twe-ripple-color="light"   >
+                        
+                                
+                                <div class="aspect-w-1 aspect-h-1">
+                                    <img  src="{{ $image->path }}" alt="画像が読み込めません。" class="object-cover w-full h-full rounded-lg shadow-md" />
+                                </div>
+
+                                <a href='/posts/{{ $post->id }}'>
+                                    <div
+                                    class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-[hsl(0,0%,98.4%,0.2)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100">
+                                    </div>
+                                </a>
+                                <h2 class='name'>{{ $post->title }}</h2>
+                                <h2 class='name'>{{ $post->user->name }}</h2>     
+                            </div>
+                                    @endif
+                                @endif
+                            @endforeach
+
+                            <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button 
+                                    class="bg-red-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
+                                    type="button" onclick="deletePost({{ $post->id }})">delete</button> 
+                            </form>
+                        </div>    
+                        @endforeach
+                </div>
+                    
+        
+        <div class='paginate'>
+            {{ $posts->links() }}
+        </div>
+
+        <script>
+            function deletePost(id) {
+                'use strict'
+                if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+                    document.getElementById(`form_${id}`).submit();
+                }
+            }
+        </script>
+    </body>
+
+
+</x-app-layout>
+   
+</html>
+
