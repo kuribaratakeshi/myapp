@@ -63,7 +63,7 @@ class PostController extends Controller
             $image->save();
             $article_image  = new Article_Image;
             $article_image->article_id = $article->id;
-            $article_image->image_id = $image_list->id;
+            $article_image->image_id = $image->id;
             $article_image->save();
         }
 

@@ -12,11 +12,13 @@
     </x-slot>
     <body >
         
-    <div class="mb-10">
+    <div class="container mx-auto pt-10 px-2">
 
-    <h1  class="text-5xl">Blog Name</h1>
+     <h1  class="text-center font-bold py-2">Blog Name</h1>
     
-        <form action="/posts" method="POST"enctype="multipart/form-data">
+     <div class="flex flex-col gap-2 border p-4 rounded-lg">
+
+     <form action="/posts" method="POST"enctype="multipart/form-data">
             @csrf
             <div class = "image">
                 <input type="file" id ="image_files" name="post[image][]"  multiple>
@@ -44,12 +46,12 @@
                 </form>
             </div>
 
-            <div class="bg-blue-500 text-black p-4">
+            <div class=" bg-blue-500 text-black p-4">
                 <h2>Title</h2>
                 <input type="text" name="post[title]" placeholder="タイトル"/>
                 <p class ="title__error" style = "color:red">{{$errors -> first('post.title')}}</p>
             </div>
-            <div class="bg-blue-500 text-black p-4">
+            <div class=" bg-blue-500 text-black p-4">
                 <h2>Caption</h2>
                 <textarea name="post[body]" placeholder="キャプション"></textarea>
                 <p class ="caption__error" style = "color:red">{{$errors -> first('post.body')}}</p>
@@ -64,6 +66,11 @@
             <a href="/">戻る</a>
         </div>
 
+
+
+
+     </div>
+   
 
     </div>
        
