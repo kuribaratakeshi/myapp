@@ -16,6 +16,7 @@ export default {
             },
         },
     },
+    plugins: [require("@tailwindcss/aspect-ratio")],
 
     white: {
         300: "#F8F8F8",

@@ -109,7 +109,7 @@ class PostController extends Controller
     public function delete(Article $article)
     {
         $article->delete();
-        return redirect('/');
+        return redirect('/posts/myindex');
         
     }
 
