@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 
-
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,9 +11,10 @@
 
     <x-app-layout>
     <x-slot name="header">
-        （ヘッダー名）
-</x-slot>
-   
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
     <body>
         <h1 class="title">
             {{ $post->title }}

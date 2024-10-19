@@ -22,18 +22,18 @@ Route::get('/', function () {
 
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     Route::get('/', 'index')->name('index');
+    Route::get('/posts/myindex', 'myindex')->name('myindex');
+
     Route::post('/posts', 'store')->name('store');
     Route::get('/posts/create', 'create')->name('create');
     Route::get('/posts/serch','serch') ->name('serch');
-    
-
 
     Route::get('/posts/{article}', 'show')->name('show');
-    Route::put('/posts/{post}', 'update')->name('update');
-    Route::delete('/posts/{post}', 'delete')->name('delete');
+    Route::put('/posts/{article}', 'update')->name('update');
+    Route::delete('/posts/{article}', 'delete')->name('delete');
 
-    Route::post('/posts/{post}/comment','comment')->name('comment');
-    Route::get('/posts/{post}/edit', 'edit')->name('edit');
+    Route::post('/posts/{article}/comment','comment')->name('comment');
+    Route::get('/posts/{article}/edit', 'edit')->name('edit');
     
 }); 
 

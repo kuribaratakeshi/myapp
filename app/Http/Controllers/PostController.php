@@ -16,15 +16,19 @@ use App\Http\Requests\CommentPostRequest;
 
 class PostController extends Controller
 {
-    //
-
-
-
+    
     public function index(Article $article)//インポートしたArticleをインスタンス化して$postとして使用。
     {
         return view('posts.index')->with(['posts' => $article->getPaginateByLimit()]);  
     }
 
+
+    public function myindex(Article $article)//インポートしたArticleをインスタンス化して$postとして使用。
+    {
+        $user = Auth::user();
+       
+        return view('posts.myindex')->with(['posts' => $article->getMyPaginateByLimit(10,$user->id)]);  
+    }
 
     //web.phpのgetの名前({post}のような)にArticleの名前を一致させる必要がある
 
@@ -71,40 +75,40 @@ class PostController extends Controller
     }
 
 
-    public function comment(Article $post,CommentPostRequest $request)
+    public function comment(Article $article,CommentPostRequest $request)
     {
         $comment  = new comment;
         $user = Auth::user();
         $comment->user_id = $user->id;
-        $comment->article_id = $post ->id;
+        $comment->article_id = $article ->id;
         $comment->comment =$request->comment;
         $comment->save();
 
-        return redirect('/posts/'.$post->id);
+        return redirect('/posts/'.$article->id);
     }
 
 
 
-    public function edit(Article $post)
+    public function edit(Article $article)
     {
 
-        return view('posts.edit')->with(['post' => $post]);
+        return view('posts.edit')->with(['post' => $article]);
 
     }
 
-    public function update(PostRequest $request,Article $post)
+    public function update(PostRequest $request,Article $article)
     {
         
         $input_post = $request['post'];
-        $post->fill($input_post)->save();
+        $article->fill($input_post)->save();
 
-        return redirect('/posts/' . $post->id);
+        return redirect('/posts/' . $article->id);
 
     }
 
-    public function delete(Article $post)
+    public function delete(Article $article)
     {
-        $post->delete();
+        $article->delete();
         return redirect('/');
         
     }

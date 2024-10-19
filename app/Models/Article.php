@@ -10,7 +10,7 @@ class Article extends Model
     use SoftDeletes;
     use HasFactory;
     
-
+    
     protected $fillable = [
         'user_id',
         'title',
@@ -26,11 +26,17 @@ class Article extends Model
         return $this->orderBy('created_at', 'DESC')->paginate($limit_count);
     }
 
+    public function getMyPaginateByLimit(int $limit_count = 10,int $user_id)
+    {
+        
+        return $this->where('user_id',$user_id)->orderBy('created_at', 'DESC')->paginate($limit_count);
+    }
+
+
 
     public function user()
     {
         return $this->belongsTo(User::class);  
-
     }
     
     public function likes()
@@ -43,6 +49,7 @@ class Article extends Model
         return $this->hasMany(Comment::class);  
 
     }
+
 
     public function images()
     {

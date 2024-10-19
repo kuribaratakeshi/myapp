@@ -16,9 +16,9 @@
 
      <h1  class="text-center font-bold py-2">Blog Name</h1>
     
-     <div class="flex flex-col gap-2 border p-4 rounded-lg">
+     <div class="space-y-4 flex flex-col gap-2 border p-4 rounded-lg ">
 
-     <form action="/posts" method="POST"enctype="multipart/form-data">
+        <form action="/posts" method="POST"enctype="multipart/form-data">
             @csrf
             <div class = "image">
                 <input type="file" id ="image_files" name="post[image][]"  multiple>
@@ -29,23 +29,6 @@
             
             <div  id="cimage"></div>
             
-            <div class="bg-red-500 text-black p-4" id="tagform">
-            <h2>Tag</h2>
-                <form>
-                    <input list ="taglist" autocomplete="off"  type="search" id="taginput" />
-                        <datalist id="taglist">
-                            <option value="Java"></option>
-                            <option value="JavaScript"></option>
-                            <option value="Ruby"></option>
-                            <option value="Python"></option>
-                            <option value="PHP"></option>
-                            <option value="TypeScript"></option>
-                            <option value="HTML"></option>
-                            <option value="CSS"></option>
-                        </datalist>
-                </form>
-            </div>
-
             <div class=" bg-blue-500 text-black p-4">
                 <h2>Title</h2>
                 <input type="text" name="post[title]" placeholder="タイトル"/>

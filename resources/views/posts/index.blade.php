@@ -11,42 +11,65 @@
 
 <x-app-layout>
     <x-slot name="header">
-    Article Index
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
     </x-slot>
 
-    <body>
-
-        <h2>
-        <a href='/posts/create'>create</a>
-        </h2>
-
-        <div >
-            @foreach ($posts as $post)
-                <div>
-                    <h2 class='name'>{{ Auth::user()->name }}</h2>
-                    <h2 class='title'>
-                        <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-                    </h2>
-                    <h1>画像表示</h1>
-                
-                @foreach (\App\Models\Image::find($post->article_images()->where('article_id',$post->id)->get('image_id')) as $image)
-                @if($image->path)
-                    <img   src="{{ $image->path }}"width="10%" height="10%" alt="画像が読み込めません。">
-                @endif
-                @endforeach
-                    
-                    <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button 
-                    class="bg-red-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
-                    type="button" onclick="deletePost({{ $post->id }})">delete</button> 
-                    </form>
-
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ __("index") }}
                 </div>
-
-            @endforeach
+               
+                <button 
+                class="bg-red-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
+                type="button" onclick="location.href = '/posts/create'">
+                create
+                </button> 
+            </div>
         </div>
+    </div>
+    
+    <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+ 
+   
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-4 p-4">
+
+                    @foreach ($posts as $post)
+                        <div>       
+                        
+                            @foreach (  $post->images as $index=> $image)
+                                @if($image->path)
+                                    @if($index < 1)
+                            <div    class="relative max-w-xs overflow-hidden bg-cover bg-no-repeat"
+                                    data-twe-ripple-init
+                                    data-twe-ripple-color="light"   >
+                        
+                                
+                                <div class="aspect-w-1 aspect-h-1 ">
+                                    <img  src="{{ $image->path }}" alt="画像が読み込めません。" class="object-cover w-full h-full rounded-lg shadow-md" />
+                                </div>
+
+                                <a href='/posts/{{ $post->id }}'>
+                                    <div
+                                    class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-[hsl(0,0%,98.4%,0.2)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100">
+                                    </div>
+                                </a>
+                                <h2 class='name'>{{ $post->title }}</h2>
+                                <h2 class='name'>{{ $post->user->name }}</h2>     
+                                
+
+                            </div>
+                                    @endif
+                                @endif
+                            @endforeach
+                        </div>    
+                        @endforeach
+                </div>
+                    
         
         <div class='paginate'>
             {{ $posts->links() }}
