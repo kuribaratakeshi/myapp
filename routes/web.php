@@ -22,6 +22,8 @@ Route::get('/', function () {
 
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     Route::get('/', 'index')->name('index');
+
+    Route::get('/test', 'testcomment');
     Route::get('/posts/myindex', 'myindex')->name('myindex');
 
     Route::post('/posts', 'store')->name('store');

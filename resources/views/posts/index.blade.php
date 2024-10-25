@@ -48,7 +48,6 @@
                                                 <h2 class='name'>{{ $post->title }}</h2>
                                                 <h2 class='name'>{{ $post->user->name }}</h2>     
                                                 
-
                                             </div>
                                                     @endif
                                                 @endif

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment_Score extends Model
 {
+    protected $table = 'comment_scores';
+    
     use HasFactory;
 
     protected $fillable = [
