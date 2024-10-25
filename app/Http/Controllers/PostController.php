@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Image;
 use App\Models\Article_Image;
 use App\Models\Comment;
+use App\Models\Comment_Score;
 use Illuminate\Support\Facades\Auth;
 use Cloudinary;
 use App\Http\Requests\PostRequest; 
@@ -74,6 +75,18 @@ class PostController extends Controller
         return redirect('/posts/' . $article->id);
     }
 
+    public function testcomment()
+    {
+        $score = new Comment_Score;
+        $a = $score->get();
+        
+        dd($a);
+
+
+        $comments = Auth::user()->comments;
+
+
+    }
 
     public function comment(Article $article,CommentPostRequest $request)
     {

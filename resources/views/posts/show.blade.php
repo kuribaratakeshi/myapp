@@ -103,9 +103,7 @@
   <script>
     const commentsContainer = document.getElementById("comments");
     // コメントを初期化して表示する
-    function loadComments() {
-
-        
+    function loadComments() {        
         const comments = <?php echo json_encode($comments); ?>;
         comments.forEach(comment => addCommentToList(comment));
     }
