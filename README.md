@@ -2,28 +2,40 @@
 
 https://artapp-7c92e25d9876.herokuapp.com/
 
-イラスト投稿サイトです。
-他の人のイラストを閲覧したりコメントをすることができます。
-創作者とユーザーとのコミュニケーションを活発することを目標に作成しました。
+<br />
+
+イラスト投稿サイトです。<br />
+他の人のイラストを閲覧したりコメントをすることができます。<br />
+創作者とユーザーとのコミュニケーションを活発することを目標に作成しました。<br />
+
+<br />
 
 ## アプリケーションのイメージ
 
 ### ログイン画面
 <img src="https://github.com/user-attachments/assets/774d5188-db2b-4d6b-a5ba-54c74ff8ba7f" width ="600">
 
+<br />
+
 ### メイン画面
 <img src="https://github.com/user-attachments/assets/c21f68f4-9671-423e-a6c2-29510f9fa12f" width ="600">
+
+<br />
 
 ### イラストの詳細画面
 <img src="https://github.com/user-attachments/assets/094bf7bd-608a-4854-9acb-04f0d9bd8791" width ="600">
 
+<br />
+
 ### イラスト投稿画面
 <img src="https://github.com/user-attachments/assets/9660079d-3547-4987-af24-34f405d68baf" width ="600">
+
+<br />
 
 ### イラスト検索画面
 <img src="https://github.com/user-attachments/assets/0636f3b8-4bae-456b-8af9-b8f3d1b797d2" width ="600">
 
-
+<br />
 
 ## 使用技術
 
@@ -36,12 +48,24 @@ https://artapp-7c92e25d9876.herokuapp.com/
 - Git
 - GitHub
 - Heroku
-
+  
+<br />
 
 ## ER図
 ![制作物ER図 drawio](https://github.com/user-attachments/assets/3b1eee77-01e3-442b-9b2e-bbe180c4ce4c)
-##今後の展望
 
+<br />
+
+## 今後追加したい機能
+
+- フォロー機能
+- 作品に対してのいいね機能
+- コメントの評価機能
+- タグ機能
+- イラストランキング機能
+- コメントランキング機能
+
+<br />
 
 
 
