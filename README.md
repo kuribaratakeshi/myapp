@@ -7,7 +7,12 @@ https://artapp-7c92e25d9876.herokuapp.com/
 創作者とユーザーとのコミュニケーションを活発することを目標に作成しました。
 
 ## アプリケーションの機能
-![インデックス画面](https://github.com/user-attachments/assets/a010a086-f457-4b3e-88ab-500c72611e84)
+<img src="https://github.com/user-attachments/assets/094bf7bd-608a-4854-9acb-04f0d9bd8791" width ="600">
+<img src="https://github.com/user-attachments/assets/c21f68f4-9671-423e-a6c2-29510f9fa12f" width ="600">
+<img src="https://github.com/user-attachments/assets/9660079d-3547-4987-af24-34f405d68baf" width ="600">
+<img src="https://github.com/user-attachments/assets/0636f3b8-4bae-456b-8af9-b8f3d1b797d2" width ="600">
+
+
 
 ## 使用技術
 
@@ -23,7 +28,7 @@ https://artapp-7c92e25d9876.herokuapp.com/
 
 
 ## ER図
-
+![制作物ER図 drawio](https://github.com/user-attachments/assets/3b1eee77-01e3-442b-9b2e-bbe180c4ce4c)
 ##今後の展望
 
 
