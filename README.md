@@ -6,10 +6,21 @@ https://artapp-7c92e25d9876.herokuapp.com/
 他の人のイラストを閲覧したりコメントをすることができます。
 創作者とユーザーとのコミュニケーションを活発することを目標に作成しました。
 
-## アプリケーションの機能
-<img src="https://github.com/user-attachments/assets/094bf7bd-608a-4854-9acb-04f0d9bd8791" width ="600">
+## アプリケーションのイメージ
+
+### ログイン画面
+<img src="https://github.com/user-attachments/assets/774d5188-db2b-4d6b-a5ba-54c74ff8ba7f" width ="600">
+
+### メイン画面
 <img src="https://github.com/user-attachments/assets/c21f68f4-9671-423e-a6c2-29510f9fa12f" width ="600">
+
+### イラストの詳細画面
+<img src="https://github.com/user-attachments/assets/094bf7bd-608a-4854-9acb-04f0d9bd8791" width ="600">
+
+### イラスト投稿画面
 <img src="https://github.com/user-attachments/assets/9660079d-3547-4987-af24-34f405d68baf" width ="600">
+
+### イラスト検索画面
 <img src="https://github.com/user-attachments/assets/0636f3b8-4bae-456b-8af9-b8f3d1b797d2" width ="600">
 
 
