@@ -40,6 +40,7 @@ https://artapp-7c92e25d9876.herokuapp.com/
 ## 使用技術
 
 - PHP
+- HTML
 - MySQL
 - Laravel
 - Cloudinary
